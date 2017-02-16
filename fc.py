@@ -5,30 +5,30 @@ from selenium import webdriver
 
 
 class Word(object):
-    def __init__(self, text):
-        self.text = text
-    def start(self):
+    def __init__(self):
+        self.driver = webdriver.PhantomJS()
+    def start(self,text):
         # PhantomJS
-        driver = webdriver.PhantomJS()
+
         url = 'http://language.tiu.ac.jp/'
 
-        driver.get(url)
+        self.driver.get(url)
 
         time.sleep(3)
-        aa = driver.page_source
-        driver.find_element_by_css_selector(
+        aa = self.driver.page_source
+        self.driver.find_element_by_css_selector(
             "body > center > form > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(2) > td > textarea").send_keys(
-            self.text)
+            text)
         time.sleep(3)
 
-        driver.find_element_by_css_selector(
+        self.driver.find_element_by_css_selector(
             "body > center > form > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(3) > td > input:nth-child(1)").click()
 
         time.sleep(3)
-        driver.switch_to_window(driver.window_handles[1])
+        self.driver.switch_to_window(self.driver.window_handles[1])
         time.sleep(12)
-        driver.switch_to.frame("dic")
-        soup = BeautifulSoup(driver.page_source, 'lxml')
+        self.driver.switch_to.frame("dic")
+        soup = BeautifulSoup(self.driver.page_source, 'lxml')
 
         time.sleep(12)
         select1 = "#overflowbox  font[size=3]"
@@ -51,6 +51,7 @@ class Word(object):
             # print(aa1 + ': ' + aa2)
             li.append(aa1 + ': ' + aa2)
         print(li)
+        time.sleep(12)
         # z = ''
         #
         # for y in li:
