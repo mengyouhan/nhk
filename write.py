@@ -29,23 +29,27 @@ class WriteMd():
             '''.format(juzi=j)
             f.write(str10 + '\n')
 
-            find_word = Word(j).start()
+            find_word = Word().start(j)
             # find_word = ['抱える: 【 かかえる 】', 'まくる: 【 まくる 】', 'トラウマ: 【 とらうま 】', '夏: 【 なつ 】', '暑い: 【 あつい 】', 'さ: 【 さ 】',
             #              'せい: 【 せい 】', '形: 【 かたち / かた / なり 】']
             find_word_d = [x.split(':')[0] for x in find_word]
+            # 翻译调用google 语调发音ojad 分词jisho
             for i, y in zip(find_word_d, find_word):
                 # 分词
                 hj = 'http://dict.hjenglish.com/jp/jc/{}'.format(i)
                 goo = 'http://dictionary.goo.ne.jp/srch/all/{}/m0u/'.format(i)
+                tangorin = 'http://tangorin.com/general/'.format(i)
+                lizi = 'http://tangorin.com/examples/'.format(i)
                 chaxun = 'gethj()'
+
                 str11 = '''
 -------
-{y}  [沪江小D]({hj})  [goo辞书]({goo})<br>
+{y}  [沪江小D]({hj})  [単語林]({tangorin})  [goo辞书]({goo}) [例句]({lizi})<br>
 ``ffsdfafd``
 
-                '''.format(y=y, hj=hj, goo=goo)
+                '''.format(y=y, hj=hj,tangorin = tangorin,goo=goo,lizi = lizi)
                 f.write(str11 + '\n')
-                # 翻译 调用google
+
 
         str3 = '''
 
@@ -56,4 +60,6 @@ class WriteMd():
 
         f.write(str3 + '\n')
         f.close()
+
+
 

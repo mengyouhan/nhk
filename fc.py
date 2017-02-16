@@ -6,7 +6,7 @@ from selenium import webdriver
 
 class Word(object):
     def __init__(self):
-        self.driver = webdriver.PhantomJS()
+        self.driver = webdriver.Chrome()
     def start(self,text):
         # PhantomJS
 
@@ -32,17 +32,15 @@ class Word(object):
 
         time.sleep(12)
         select1 = "#overflowbox  font[size=3]"
-        # soup.select(select1)
+
 
         a1 = [x.get_text() for x in soup.select(select1)]
 
         select2 = "#overflowbox > font[size=2]"
-        # print(soup.select(select2))
 
-        # a2 = [x.get_text() for x in soup.select(select2)]
 
         a2 = []
-        # soup.find_all(size="3").next_sibling
+
         for x in soup.find_all(size="3"):
             a2.append(x.next_sibling.get_text())
 
@@ -52,27 +50,9 @@ class Word(object):
             li.append(aa1 + ': ' + aa2)
         print(li)
         time.sleep(12)
-        # z = ''
-        #
-        # for y in li:
-        #     # ww = y
-        #     word = y.split(':')[0]
-        #     word1 = y.split(':')[0]
-        #
-        #     hujiang = 'http://dict.hjenglish.com/jp/jc/{}'.format(word)
-        #     goo = 'http://dictionary.goo.ne.jp/srch/all/{}/m0u/'.format(word)
-        #     last = '''
-        #             <h3>{y}</h3>
-        #             <span><a href='{hujiang}'>hujiang</a></span>
-        #             <span><a href='{goo}'>goo</a></span>
-        #
-        #             '''.format(y=y, hujiang=hujiang, goo=goo)
-        #     z += last
 
         return li
-# x = Word('抱えまくったトラウマが 夏の暑さのせいで 形を…')
-# x.start()
-# print(x.start())
+
 
 
 
